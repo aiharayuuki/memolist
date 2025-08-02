@@ -29,3 +29,7 @@
 <a class="btn btn-primary" href="{{ route('memo.create') }}">新規メモの投稿</a>
 
 @endsection
+
+
+
+

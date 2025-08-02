@@ -8,7 +8,7 @@
         <div class="flex-none">
             <ul tabindex="0" class="menu hidden lg:block lg:menu-horizontal">
                 {{-- メッセージ作成ページへのリンク --}}
-                <li><a class="link link-hover" href="{{ route('memos.create') }}">新規メッセージの投稿</a></li>
+                <li><a class="link link-hover" href="{{ route('memo.create') }}">新規メモの投稿</a></li>
             </ul>
             <div class="dropdown dropdown-end">
                 <button type="button" tabindex="0" class="btn btn-square btn-ghost lg:hidden">
@@ -24,30 +24,3 @@
         </div>
     </nav>
 </header>
-app.blade.phpに追加
-resources/views/layouts/app.blade.php
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Memolist</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-
-    <body>
-
-        {{-- ナビゲーションバー --}}
-        @include('commons.navbar')      // navbar.blade.phpを読み込む
-
-        <div class="container mx-auto">
-            {{-- エラーメッセージ --}}
-            @include('commons.error_memos')
-
-            @yield('content')
-        </div>
-
-    </body>
-</html>

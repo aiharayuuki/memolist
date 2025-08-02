@@ -58,7 +58,7 @@ class MemosController extends Controller
         $memo = Memo::findOrFail($id);
 
         // メッセージ詳細ビューでそれを表示
-        return view('memo.show', [
+        return view('memos.show', [
             'memo' => $memo,
         ]);
     }
@@ -82,7 +82,14 @@ class MemosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       // idの値でメッセージを検索して取得
+        $memo = Memo::findOrFail($id);
+        // メッセージを更新
+        $memo->content = $request->content;
+        $memo->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 
     /**
@@ -90,6 +97,12 @@ class MemosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // idの値でメッセージを検索して取得
+        $memo = Memo::findOrFail($id);
+        // メッセージを削除
+        $memo->delete();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 }
