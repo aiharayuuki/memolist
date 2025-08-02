@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th>id</th>
+      <th>タイトル</th>
       <th>メモ</th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
     @foreach ($memos as $memo)
     <tr>
       <td><a class="link link-hover text-info" href="{{ route('memo.show', $memo->id) }}">{{ $memo->id }}</a></td>
+      <td>{{ $memo->title }}</td>
       <td>{{ $memo->content }}</td>
     </tr>
     @endforeach

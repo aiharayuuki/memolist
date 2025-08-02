@@ -11,7 +11,8 @@
         <th>id</th>
         <td>{{ $memo->id }}</td>
     </tr>
-
+    <th>タイトル</th>
+    <td>{{ $memo->title }}</td>
     <tr>
         <th>メモ</th>
         <td>{{ $memo->content }}</td>
@@ -20,4 +21,14 @@
 
 {{-- メモ編集ページへのリンク --}}
 <a class="btn btn-outline" href="{{ route('memo.edit', $memo->id) }}">このメモを編集</a>
+
+{{-- メッセージ削除フォーム --}}
+<form method="POST" action="{{ route('memo.destroy', $memo->id) }}" class="my-2">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit" class="btn btn-error btn-outline"
+        onclick="return confirm('id = {{ $memo->id }} のメッセージを削除します。よろしいですか？')">削除</button>
+</form>
+
 @endsection

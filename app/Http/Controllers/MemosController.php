@@ -42,11 +42,13 @@ class MemosController extends Controller
     {
          // バリデーション
         $request->validate([
+              'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
         ]);
 
         // メッセージを作成
         $memo = new Memo;
+        $memo->title = $request->title;    // 追加
         $memo->content = $request->content;
         $memo->save();
 
@@ -89,12 +91,14 @@ class MemosController extends Controller
     {
           // バリデーション
         $request->validate([
+             'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
         ]);
 
        // idの値でメッセージを検索して取得
         $memo = Memo::findOrFail($id);
         // メッセージを更新
+        $memo->title = $request->title;    // 追加
         $memo->content = $request->content;
         $memo->save();
 
