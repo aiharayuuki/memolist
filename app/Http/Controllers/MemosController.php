@@ -40,6 +40,11 @@ class MemosController extends Controller
      */
     public function store(Request $request)
     {
+         // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+
         // メッセージを作成
         $memo = new Memo;
         $memo->content = $request->content;
@@ -82,6 +87,11 @@ class MemosController extends Controller
      */
     public function update(Request $request, string $id)
     {
+          // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+
        // idの値でメッセージを検索して取得
         $memo = Memo::findOrFail($id);
         // メッセージを更新
