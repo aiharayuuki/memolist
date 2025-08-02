@@ -8,7 +8,7 @@
 </div>
 
 <div class="flex justify-center">
-    <form method="POST" action="{{ route('memo.store') }}" class="w-1/2">
+    <form method="POST" action="{{ route('memos.store') }}" class="w-1/2">
         @csrf
 
         <div class="form-control my-4">

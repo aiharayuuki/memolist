@@ -13,7 +13,7 @@ class MemosController extends Controller
      */
     public function index()
     {
-           // メッセージ一覧を取得
+        // メッセージ一覧を取得
         $memos = Memo::all();         // 追加
 
         // メッセージ一覧ビューでそれを表示
@@ -40,15 +40,15 @@ class MemosController extends Controller
      */
     public function store(Request $request)
     {
-         // バリデーション
+        // バリデーション
         $request->validate([
-              'title' => 'required|max:255',   // 追加
+              'title' => 'required|max:255',  // 追加
             'content' => 'required|max:255',
         ]);
 
         // メッセージを作成
         $memo = new Memo;
-        $memo->title = $request->title;    // 追加
+          $memo->title = $request->title;    // 追加
         $memo->content = $request->content;
         $memo->save();
 
@@ -61,7 +61,7 @@ class MemosController extends Controller
      */
     public function show(string $id)
     {
-         // idの値でメッセージを検索して取得
+        // idの値でメッセージを検索して取得
         $memo = Memo::findOrFail($id);
 
         // メッセージ詳細ビューでそれを表示
@@ -89,16 +89,16 @@ class MemosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-          // バリデーション
+        // バリデーション
         $request->validate([
-             'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
+            'title' => 'required|max:255',
         ]);
 
-       // idの値でメッセージを検索して取得
+        // idの値でメッセージを検索して取得
         $memo = Memo::findOrFail($id);
         // メッセージを更新
-        $memo->title = $request->title;    // 追加
+        $memo->title = $request->title;   // 追加
         $memo->content = $request->content;
         $memo->save();
 

@@ -20,10 +20,10 @@
 </table>
 
 {{-- メモ編集ページへのリンク --}}
-<a class="btn btn-outline" href="{{ route('memo.edit', $memo->id) }}">このメモを編集</a>
+<a class="btn btn-outline" href="{{ route('memos.edit', $memo->id) }}">このメモを編集</a>
 
 {{-- メッセージ削除フォーム --}}
-<form method="POST" action="{{ route('memo.destroy', $memo->id) }}" class="my-2">
+<form method="POST" action="{{ route('memos.destroy', $memo->id) }}" class="my-2">
     @csrf
     @method('DELETE')
 

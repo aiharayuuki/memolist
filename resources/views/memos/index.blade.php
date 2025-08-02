@@ -18,7 +18,7 @@
   <tbody>
     @foreach ($memos as $memo)
     <tr>
-      <td><a class="link link-hover text-info" href="{{ route('memo.show', $memo->id) }}">{{ $memo->id }}</a></td>
+      <td><a class="link link-hover text-info" href="{{ route('memos.show', $memo->id) }}">{{ $memo->id }}</a></td>
       <td>{{ $memo->title }}</td>
       <td>{{ $memo->content }}</td>
     </tr>
@@ -28,7 +28,7 @@
 @endif
 
 {{-- メモ作成ページへのリンク --}}
-<a class="btn btn-primary" href="{{ route('memo.create') }}">新規メモの投稿</a>
+<a class="btn btn-primary" href="{{ route('memos.create') }}">新規メモの投稿</a>
 
 @endsection
 
