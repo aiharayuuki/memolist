@@ -1,28 +1,31 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MemosController;
 
-// トップページ（メモ一覧）
-Route::get('/', [MemosController::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-// 新規作成用フォームページ
-Route::get('memos/create', [MemosController::class, 'create'])->name('memo.create');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// 編集用フォームページ
-Route::get('memos/{id}/edit', [MemosController::class, 'edit'])->name('memo.edit');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// メモ一覧ページ
-Route::get('memos', [MemosController::class, 'index'])->name('memo.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-// メモ個別詳細ページ表示
-Route::get('memos/{id}', [MemosController::class, 'show'])->name('memo.show');
-
-// メモの新規登録処理
-Route::post('memos', [MemosController::class, 'store'])->name('memo.store');
-
-// メモの更新処理
-Route::put('memos/{id}', [MemosController::class, 'update'])->name('memo.update');
-
-// メモの削除処理
-Route::delete('memos/{id}', [MemosController::class, 'destroy'])->name('memo.destroy');
+require __DIR__.'/auth.php';
