@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Memo;
 
+use Illuminate\Support\Facades\Auth;
+
 class MemosController extends Controller
 {
     /**
@@ -75,14 +77,19 @@ class MemosController extends Controller
      */
     public function edit(string $id)
     {
-        // idの値でメッセージを検索して取得
-        $memo = Memo::findOrFail($id);
+        // IDでメモを取得
+    $memo = Memo::findOrFail($id);
 
-        // メッセージ編集ビューでそれを表示
-        return view('memos.edit', [
-            'memo' => $memo,
-        ]);
+    // 自分のメモでなければリダイレクト
+    if ($memo->user_id !== Auth::id()) {
+        return redirect('/')->with('error', '不正なアクセスです');
     }
+
+    // メモ編集ビューを表示
+    return view('memos.edit', [
+        'memo' => $memo,
+    ]);
+}
 
     /**
      * Update the specified resource in storage.
@@ -111,12 +118,14 @@ class MemosController extends Controller
      */
     public function destroy(string $id)
     {
-        // idの値でメッセージを検索して取得
         $memo = Memo::findOrFail($id);
-        // メッセージを削除
-        $memo->delete();
 
-        // トップページへリダイレクトさせる
-        return redirect('/');
+    if ($memo->user_id !== Auth::id()) {
+        return redirect('/')->with('error', '不正なアクセスです');
     }
+
+    $memo->delete();
+
+    return redirect('/')->with('success', 'メモを削除しました');
+}
 }
